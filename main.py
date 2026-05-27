@@ -10,6 +10,7 @@ from random import randint
 from extrair_produtos import extrair_produtos
 import exportar
 import argparse
+from dependency_checker import verificar_dependencias
 
 def dormir(tempo: float | int):
     time.sleep(tempo)
@@ -103,4 +104,5 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # 4. Executa a sua função principal passando os dados coletados do terminal
+    verificar_dependencias()
     iniciar(busca=args.busca, nome=args.arquivo)
