@@ -12,6 +12,7 @@ def verificar_dependencias():
             print(f'Pacote: {nome_pacote}, não encontrado. Deseja instalar ?')
             if perguntar():
                 instalar_pacote(nome_pacote)
+                continue
             else:
                 print('Encerrando processo')
                 time.sleep(1)
