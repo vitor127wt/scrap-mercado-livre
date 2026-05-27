@@ -107,6 +107,12 @@ def iniciar(busca: str, nome: str, paginas: int):
     dormir(3)
     navegador.quit()
 
+def quantidade_paginas(paginas):
+    int_paginas = int(paginas)
+    if int_paginas < 1 or int_paginas > 10:
+        raise argparse.ArgumentTypeError('O numero de paginas deve estar entre 1 e 10')
+    return int_paginas
+
 if __name__ == '__main__':
     # 1. Cria o interpretador de argumentos
     parser = argparse.ArgumentParser(description="Script de Automação de Busca no Mercado Livre")
@@ -119,20 +125,13 @@ if __name__ == '__main__':
                         help="O nome do arquivo CSV de saída (ex: resultado.csv)",
                         default='resultados.csv')
     parser.add_argument("--paginas", '-p',
-                        type=int,
-                        help="Quantas paginas deseja que sejam raspadas (Digite somente numeros)",
+                        type=quantidade_paginas,
+                        help="Quantas paginas deseja que sejam raspadas (Digite somente numeros, o limite é 10 paginas)",
                         default= 1)
     
 
     # 3. Faz o parse (extração) dos argumentos digitados
     args = parser.parse_args()
-    for char in f'{args.paginas}':
-        if not char.isdigit():
-            raise ValueError
-        if len(f'{args.paginas}') > 2:
-            raise ValueError
-        if len(f'{args.paginas}') <= 0:
-            raise ValueError
         
     # 4. Executa a sua função principal passando os dados coletados do terminal
     iniciar(busca=args.busca, nome=args.arquivo, paginas=int(args.paginas))
