@@ -77,6 +77,7 @@ def iniciar(busca: str, nome: str):
                 dormir(randint(1, 3))
                 buscar(elemento=busca, navegador=navegador)
                 dormir(randint(1, 3))
+                url_atual = f'{navegador.current_url}'
             if 'account-verification' not in url_atual:
                 break
     
