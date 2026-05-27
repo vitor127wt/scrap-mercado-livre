@@ -12,7 +12,6 @@ import exportar
 import argparse
 from dependency_checker import verificar_dependencias
 from esperar_login import esperar_login
-
 def dormir(tempo: float | int):
     time.sleep(tempo)
 
@@ -57,7 +56,7 @@ def mostrar_produtos(produtos: list) -> int:
         quantidade += 1
     return quantidade
 
-def iniciar(busca: str, nome: str):
+def iniciar(busca: str, nome: str, paginas: int):
     print('Iniciando Navegador')
     navegador = criar_navegador()
     dormir(2)
@@ -83,9 +82,9 @@ def iniciar(busca: str, nome: str):
     
     inicio = True
     quantidade_produtos = 0
-    for _ in range(1, 11):
+    for pagina in range(1, paginas):
         print('')
-        print('Lendo Pagina')
+        print(f'Lendo Pagina {pagina}')
         scroll_para_final(navegador=navegador)
         dormir(randint(1, 3))
         produtos = extrair_produtos(navegador=navegador)
@@ -114,10 +113,19 @@ if __name__ == '__main__':
     # O 'type=str' garante que o Python leia como texto, e 'help' descreve o argumento
     parser.add_argument("busca", type=str, help="O termo ou produto que você deseja buscar. Caso seja mais de uma palavra use "" ")
     parser.add_argument("arquivo", type=str, help="O nome do arquivo CSV de saída (ex: resultado.csv)")
+    parser.add_argument("paginas", type=int, help="Quantas paginas deseja que sejam raspadas")
+    
 
     # 3. Faz o parse (extração) dos argumentos digitados
     args = parser.parse_args()
-
+    for char in f'{args.paginas}':
+        if not char.isdigit():
+            raise ValueError
+        if len(f'{args.paginas}') > 2:
+            raise ValueError
+        if len(f'{args.paginas}') <= 0:
+            raise ValueError
+        
     # 4. Executa a sua função principal passando os dados coletados do terminal
     verificar_dependencias()
-    iniciar(busca=args.busca, nome=args.arquivo)
+    iniciar(busca=args.busca, nome=args.arquivo, paginas=int(args.paginas))
