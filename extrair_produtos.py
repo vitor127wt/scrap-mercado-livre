@@ -50,8 +50,9 @@ def extrair_valor(card) -> float:
 
 
 def converter_reais(card):
-    reais = card.find_element(By.CSS_SELECTOR, 'span.andes-money-amount__fraction')
-    reais_str = reais.text
+    reais_element = card.find_element(By.CLASS_NAME, 'poly-price__current')
+    reais_element_current = reais_element.find_element(By.CSS_SELECTOR, 'span.andes-money-amount__fraction')
+    reais_str = reais_element_current.text
     new_reais = ''
     for char in reais_str:
         if char.isdigit():
@@ -60,13 +61,14 @@ def converter_reais(card):
 
 
 def converter_centavos(card):
+    centavos_element = card.find_element(By.CLASS_NAME, 'poly-price__current')
     try:
-        centavos = card.find_element(By.CSS_SELECTOR, 'span.andes-money-amount__cents.andes-money-amount__cents--superscript-24')
+        centavos_element_current = centavos_element.find_element(By.CSS_SELECTOR, 'span.andes-money-amount__cents.andes-money-amount__cents--superscript-24')
     except NoSuchElementException:
-        centavos = '00'
-    if centavos != '00':
-        return centavos.text
-    return centavos
+        centavos_element_current = '00'
+    if centavos_element_current != '00':
+        return centavos_element_current.text
+    return centavos_element_current
 
 def extrair_desconto(card) -> bool | str:
     try:
@@ -144,3 +146,5 @@ def extrair_link(card):
     link_element = titulo.find_element(By.TAG_NAME, 'a')
     link = link_element.get_attribute('href')
     return link
+
+
