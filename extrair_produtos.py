@@ -98,6 +98,8 @@ def extrair_parcelamento(card):
             parcelamento_vezes += char
     if 'sem juros' in parcelamento_str:
         parcelamento_sem_juros = True
+    if int(parcelamento_vezes) > 24:
+        parcelamento_vezes = 0
     
     return {'vezes' : parcelamento_vezes,
             'sem_juros' : parcelamento_sem_juros}
