@@ -108,8 +108,11 @@ def extrair_frete(card):
     except NoSuchElementException:
         return {'frete': False,
             'full': False}
-    frete_gratis_element = frete_element.find_element(By.TAG_NAME, 'span')
-    frete_gratis_str = f'{frete_gratis_element.text}'
+    try:
+        frete_gratis_element = frete_element.find_element(By.TAG_NAME, 'span')
+        frete_gratis_str = f'{frete_gratis_element.text}'
+    except:
+        frete_gratis_str = f'Sem Frete Gratis'
     try:
         frete_full_element = frete_element.find_element(By.TAG_NAME, 'svg')
     except NoSuchElementException:
