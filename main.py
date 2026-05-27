@@ -56,7 +56,7 @@ def mostrar_produtos(produtos: list) -> int:
         quantidade += 1
     return quantidade
 
-def iniciar(busca: str, nome: str, paginas: int):
+def iniciar(busca: str, nome: str, paginas: int = 1):
     print('Iniciando Navegador')
     navegador = criar_navegador()
     dormir(2)
