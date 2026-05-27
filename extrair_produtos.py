@@ -31,7 +31,8 @@ def extrair_produto(card) -> dict:
         'parcelamento_sem_juros' : parcelamento['sem_juros'],
         'frete_gratis' : frete['frete'],
         'frete_full' : frete['full'],
-        'condicao' : extrair_condicao(card=card)
+        'condicao' : extrair_condicao(card=card),
+        'link' : extrair_link(card=card)
         
     }
     return produto
@@ -135,3 +136,9 @@ def extrair_condicao(card):
         usado = True
         return usado
     return False
+
+def extrair_link(card):
+    titulo = card.find_element(By.CLASS_NAME, 'poly-component__title-wrapper')
+    link_element = titulo.find_element(By.TAG_NAME, 'a')
+    link = link_element.get_attribute('href')
+    return link
