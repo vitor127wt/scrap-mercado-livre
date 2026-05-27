@@ -1,4 +1,6 @@
 
+from dependency_checker import verificar_dependencias
+verificar_dependencias()
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -10,7 +12,6 @@ from random import randint
 from extrair_produtos import extrair_produtos
 import exportar
 import argparse
-from dependency_checker import verificar_dependencias
 from esperar_login import esperar_login
 def dormir(tempo: float | int):
     time.sleep(tempo)
