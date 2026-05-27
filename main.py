@@ -68,7 +68,7 @@ def iniciar(busca: str, nome: str):
     inicio = True
     quantidade_produtos = 0
     for _ in range(1, 11):
-        print(r'\n')
+        print('')
         print('Lendo Pagina')
         scroll_para_final(navegador=navegador)
         dormir(randint(1, 3))
