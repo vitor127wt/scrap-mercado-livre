@@ -31,7 +31,7 @@ def instalar_pacote(pacote):
 
 def perguntar(pergunta: str = '[Y] Para instalar. [N] Para sair.') -> bool:
     resposta = input(pergunta)
-    resposta.upper()
+    resposta = resposta.upper()
     if not validar_resposta(resposta):
         print('Entrada invalida.')
         perguntar(pergunta)
