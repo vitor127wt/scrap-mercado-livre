@@ -23,7 +23,7 @@ def criar_navegador():
     options.add_argument(r"--profile-directory=Default")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--headless=new")
+    # options.add_argument("--headless=new")
     navegador = webdriver.Chrome(service=service, options=options)
     return navegador
 
