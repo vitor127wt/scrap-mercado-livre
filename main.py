@@ -11,6 +11,7 @@ from extrair_produtos import extrair_produtos
 import exportar
 import argparse
 from dependency_checker import verificar_dependencias
+from esperar_login import esperar_login
 
 def dormir(tempo: float | int):
     time.sleep(tempo)
@@ -65,7 +66,20 @@ def iniciar(busca: str, nome: str):
     dormir(randint(1, 3))
     buscar(elemento=busca, navegador=navegador)
     dormir(randint(1, 3))
-
+    
+    url_atual = f'{navegador.current_url}'
+    
+    if 'account-verification' in url_atual:
+        while True:
+            if esperar_login():
+                dormir(5)
+                navegador.get("https://www.mercadolivre.com.br/")
+                dormir(randint(1, 3))
+                buscar(elemento=busca, navegador=navegador)
+                dormir(randint(1, 3))
+            if 'account-verification' not in url_atual:
+                break
+    
     inicio = True
     quantidade_produtos = 0
     for _ in range(1, 11):
@@ -87,7 +101,7 @@ def iniciar(busca: str, nome: str):
         exportar.adicionar_csv(nome, data_frame)
         proxima_pagina(navegador=navegador)
         dormir(randint(3, 8))
-    print(f'Foram encontrados {quantidade_produtos}.')
+    print(f'Foram encontrados {quantidade_produtos} itens.')
     dormir(3)
     navegador.quit()
 

@@ -29,12 +29,12 @@ def instalar_pacote(pacote):
         time.sleep(1)
         sys.exit(1)
 
-def perguntar() -> bool:
-    resposta = input('[Y] Para instalar. [N] Para sair.')
+def perguntar(pergunta: str = '[Y] Para instalar. [N] Para sair.') -> bool:
+    resposta = input(pergunta)
     resposta.upper()
     if not validar_resposta(resposta):
         print('Entrada invalida.')
-        perguntar()
+        perguntar(pergunta)
     return True if resposta == 'Y' else False
 
 def validar_resposta(resposta) -> bool:
