@@ -1,0 +1,31 @@
+# --- PASTAS DA SUA AUTOMAÇÃO (SELENIUM) ---
+# Ignora a pasta com o perfil do Chrome e dados temporários do navegador
+/tmp/
+chrome_profile/
+
+# Ignora os arquivos CSV e planilhas gerados pelas buscas
+*.csv
+*.xlsx
+
+# --- AMBIENTES VIRTUAIS E DEPENDÊNCIAS ---
+# Caso você use ambientes virtuais do Python no projeto
+.venv/
+venv/
+env/
+.env/
+ENV/
+
+# --- ARQUIVOS INTERNOS DO PYTHON ---
+# Ignora caches de compilação do Python que poluem o repositório
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# --- CONFIGURAÇÕES DE SISTEMA / INDIVIDUAIS ---
+# Ignora pastas ocultas do VS Code, PyCharm e arquivos do Windows/Mac
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
