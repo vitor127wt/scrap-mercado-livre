@@ -57,6 +57,7 @@ def mostrar_produtos(produtos: list) -> int:
     return quantidade
 
 def iniciar(busca: str, nome: str, paginas: int):
+    verificar_dependencias()
     print('Iniciando Navegador')
     navegador = criar_navegador()
     dormir(2)
@@ -133,5 +134,4 @@ if __name__ == '__main__':
             raise ValueError
         
     # 4. Executa a sua função principal passando os dados coletados do terminal
-    verificar_dependencias()
     iniciar(busca=args.busca, nome=args.arquivo, paginas=int(args.paginas))
