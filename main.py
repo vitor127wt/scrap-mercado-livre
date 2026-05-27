@@ -82,7 +82,7 @@ def iniciar(busca: str, nome: str, paginas: int):
     
     inicio = True
     quantidade_produtos = 0
-    for pagina in range(1, paginas):
+    for pagina in range(1, paginas + 1):
         print('')
         print(f'Lendo Pagina {pagina}')
         scroll_para_final(navegador=navegador)
