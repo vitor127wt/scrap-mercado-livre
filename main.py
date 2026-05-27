@@ -111,9 +111,9 @@ if __name__ == '__main__':
 
     # 2. Define os argumentos que o terminal deve receber
     # O 'type=str' garante que o Python leia como texto, e 'help' descreve o argumento
-    parser.add_argument("busca", type=str, help="O termo ou produto que você deseja buscar. Caso seja mais de uma palavra use "" ")
+    parser.add_argument("busca", type=str, help="O termo ou produto que você deseja buscar. Caso seja mais de uma palavra use aspas ")
     parser.add_argument("arquivo", type=str, help="O nome do arquivo CSV de saída (ex: resultado.csv)")
-    parser.add_argument("paginas", type=int, help="Quantas paginas deseja que sejam raspadas")
+    parser.add_argument("paginas", type=int, help="Quantas paginas deseja que sejam raspadas (Digite somente numeros)")
     
 
     # 3. Faz o parse (extração) dos argumentos digitados
