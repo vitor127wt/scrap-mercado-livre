@@ -44,10 +44,10 @@ def scroll_para_final(navegador):
         navegador.execute_script("window.scrollBy(0, 500);")
         dormir(tempo=tempo)
 
-def proxima_pagina(navegador):
+def proxima_pagina(navegador, pagina):
     paginador_element = navegador.find_element(By.TAG_NAME, 'nav')
     botao_next = paginador_element.find_element(By.XPATH, '//*[@id="root-app"]/div/div[1]/section/nav/ul/li[12]')
-    print('Passando pagina')
+    print(f'Passando para a pagina {pagina + 1}')
     botao_next.click()
     
 
@@ -99,11 +99,10 @@ def iniciar(busca: str, nome: str, paginas: int):
             dormir(randint(2, 5))
             if paginas == 1:
                 continue
-            proxima_pagina(navegador=navegador)
+            proxima_pagina(navegador=navegador, pagina=pagina)
             continue
         exportar.adicionar_csv(nome, data_frame)
-        print(f'Lendo Pagina {pagina}')
-        proxima_pagina(navegador=navegador)
+        proxima_pagina(navegador=navegador, pagina=pagina)
         dormir(randint(3, 8))
     print(f'Foram encontrados {quantidade_produtos} itens.')
     dormir(3)
