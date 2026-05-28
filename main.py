@@ -13,6 +13,7 @@ from extrair_produtos import extrair_produtos
 import exportar
 import argparse
 from esperar_login import esperar_login
+from bot_telegram import iniciar_bot
 def dormir(tempo: float | int):
     time.sleep(tempo)
 
@@ -47,6 +48,7 @@ def scroll_para_final(navegador):
 def proxima_pagina(navegador, pagina):
     paginador_element = navegador.find_element(By.TAG_NAME, 'nav')
     botao_next = paginador_element.find_element(By.XPATH, '//*[@id="root-app"]/div/div[1]/section/nav/ul/li[12]')
+    print('')
     print(f'Passando para a pagina {pagina + 1}')
     botao_next.click()
     
@@ -102,7 +104,8 @@ def iniciar(busca: str, nome: str, paginas: int):
             dormir(randint(2, 6))
             continue
         exportar.adicionar_csv(nome, data_frame)
-        proxima_pagina(navegador=navegador, pagina=pagina)
+        if pagina > paginas + 1:
+            proxima_pagina(navegador=navegador, pagina=pagina)
         dormir(randint(3, 8))
     print(f'Foram encontrados {quantidade_produtos} itens.')
     dormir(3)
@@ -129,10 +132,16 @@ if __name__ == '__main__':
                         type=quantidade_paginas,
                         help="Quantas paginas deseja que sejam raspadas (Digite somente numeros, o limite é 10 paginas)",
                         default= 1)
+    parser.add_argument('--telegram', '-t',
+                        action='store-true',
+                        help='Inicia o script para responder pelo bot do Telegram')
     
-
     # 3. Faz o parse (extração) dos argumentos digitados
     args = parser.parse_args()
-        
+    if args.telegram:
+        iniciar_bot()
+    elif args.busca:
+        iniciar(busca=args.busca, nome=args.arquivo, paginas=int(args.paginas))
+    else:
+        parser.print_help()
     # 4. Executa a sua função principal passando os dados coletados do terminal
-    iniciar(busca=args.busca, nome=args.arquivo, paginas=int(args.paginas))
