@@ -13,7 +13,6 @@ from extrair_produtos import extrair_produtos
 import exportar
 import argparse
 from esperar_login import esperar_login
-from bot_telegram import iniciar_bot
 def dormir(tempo: float | int):
     time.sleep(tempo)
 
@@ -144,6 +143,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     print(args.telegram)
     if args.telegram:
+        from bot_telegram import iniciar_bot
         iniciar_bot()
     elif args.busca:
         iniciar(busca=args.busca, nome=args.arquivo, paginas=int(args.paginas))
