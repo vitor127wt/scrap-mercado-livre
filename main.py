@@ -13,6 +13,8 @@ from extrair_produtos import extrair_produtos
 import exportar
 import argparse
 from esperar_login import esperar_login
+import asyncio
+
 def dormir(tempo: float | int):
     time.sleep(tempo)
 
@@ -52,18 +54,31 @@ def proxima_pagina(navegador, pagina):
     botao_next.click()
     
 
-def mostrar_produtos(produtos: list) -> int:
-    quantidade = 1
-    for produto in produtos:
-        print(f'{quantidade} -> {produto['nome']}')
-        quantidade += 1
-    return quantidade
 
-def iniciar(busca: str, nome: str, paginas: int):
-    print('Iniciando Navegador')
+def iniciar(busca: str, nome: str, paginas: int, telegram : tuple = None):
+
+
+    def mensagem(texto: str):
+        print(texto)
+        if telegram:
+            chat_id, loop, context = telegram
+            
+            asyncio.run_coroutine_threadsafe(
+                context.bot.send_message(chat_id=chat_id, text=texto),
+                loop
+            )
+
+    def mostrar_produtos(produtos: list) -> int:
+        quantidade = 1
+        for produto in produtos:
+            mensagem(f'{quantidade} -> {produto['nome']}')
+            quantidade += 1
+        return quantidade
+
+    mensagem('Iniciando navegador')
     navegador = criar_navegador()
     dormir(2)
-    print('Acessando Mercado Livre')
+    mensagem('Acessando Mercado Livre')
     navegador.get("https://www.mercadolivre.com.br/")
     dormir(randint(1, 3))
     buscar(elemento=busca, navegador=navegador)
@@ -87,7 +102,7 @@ def iniciar(busca: str, nome: str, paginas: int):
     quantidade_produtos = 0
     for pagina in range(1, paginas + 1):
         print('')
-        print(f'Lendo Pagina {pagina}')
+        mensagem(f'Lendo Pagina {pagina}')
         scroll_para_final(navegador=navegador)
         dormir(randint(1, 3))
         produtos = extrair_produtos(navegador=navegador)
@@ -106,9 +121,10 @@ def iniciar(busca: str, nome: str, paginas: int):
         if pagina > paginas + 1:
             proxima_pagina(navegador=navegador, pagina=pagina)
         dormir(randint(3, 8))
-    print(f'Foram encontrados {quantidade_produtos} itens.')
+    mensagem(f'Foram encontrados {quantidade_produtos} itens.')
     dormir(3)
     navegador.quit()
+
 
 def quantidade_paginas(paginas):
     int_paginas = int(paginas)

@@ -22,11 +22,15 @@ async def buscar(update: Update, context: ContextTypes.DEFAULT_TYPE):
     termo_busca = update.message.text
     arquivo_saida = f'resultados_{termo_busca.replace(' ', '_')}.csv'
     
+    chat_id = update.message.chat_id
+    loop_atual = asyncio.get_running_loop()
+    dados_conversa = (chat_id, context, loop_atual)
+    
     await update.message.reply_text(f'Iniciando busca por {termo_busca}')
     
     try:
         from main import iniciar
-        await asyncio.to_thread(iniciar, busca=termo_busca, nome=arquivo_saida, paginas=3)
+        await asyncio.to_thread(iniciar, busca=termo_busca, nome=arquivo_saida, paginas=3, telegram=dados_conversa)
         if os.path.exists(arquivo_saida):
             await update.message.reply_text('Busca concluida ! Enviando Arquivo')
             with open (arquivo_saida, 'rb') as resultado:
