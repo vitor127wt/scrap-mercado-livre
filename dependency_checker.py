@@ -22,7 +22,7 @@ def verificar_dependencias():
 
 def instalar_pacote(pacote):
     try:
-        subprocess.check_call([sys.executable, '-m', 'pip', pacote])
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', pacote])
         print(f'Pacote {pacote}, instalado com sucesso')
     except Exception as e:
         print(f'Erro ao instalar {pacote}: {e}')
