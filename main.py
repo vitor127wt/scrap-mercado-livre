@@ -141,7 +141,6 @@ if __name__ == '__main__':
     
     # 3. Faz o parse (extração) dos argumentos digitados
     args = parser.parse_args()
-    print(args.telegram)
     if args.telegram:
         from bot_telegram import iniciar_bot
         iniciar_bot()
