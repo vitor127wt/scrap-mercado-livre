@@ -5,7 +5,7 @@ import time
 def verificar_dependencias():
     DEPENDENCIAS = ['selenium', 'webdriver-manager', 'pandas', 'python-telegram-bot']
     for dependencia in DEPENDENCIAS:
-        nome_pacote = dependencia.replace('-', '_')
+        nome_pacote = dependencia
         try:
             __import__(nome_pacote)
         except ModuleNotFoundError:
