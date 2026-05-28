@@ -6,6 +6,7 @@ chrome_profile/
 # Ignora os arquivos CSV e planilhas gerados pelas buscas
 *.csv
 *.xlsx
+*.json
 
 # --- AMBIENTES VIRTUAIS E DEPENDÊNCIAS ---
 # Caso você use ambientes virtuais do Python no projeto
