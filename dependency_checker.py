@@ -3,7 +3,7 @@ import subprocess
 import time
 
 def verificar_dependencias():
-    DEPENDENCIAS = ['selenium', 'webdriver-manager', 'pandas']
+    DEPENDENCIAS = ['selenium', 'webdriver-manager', 'pandas', 'python-telegram-bot']
     for dependencia in DEPENDENCIAS:
         nome_pacote = dependencia.replace('-', '_')
         try:
