@@ -30,7 +30,7 @@ async def buscar(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     try:
         from main import iniciar
-        await asyncio.to_thread(iniciar, busca=termo_busca, nome=arquivo_saida, paginas=3, telegram=dados_conversa)
+        await asyncio.to_thread(iniciar, busca=termo_busca, nome=arquivo_saida, paginas=1, telegram=dados_conversa)
         if os.path.exists(arquivo_saida):
             await update.message.reply_text('Busca concluida ! Enviando Arquivo')
             with open (arquivo_saida, 'rb') as resultado:
