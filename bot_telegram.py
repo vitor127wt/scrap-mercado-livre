@@ -10,3 +10,5 @@ def chave_api():
     CHAVE_TELEGRAM = data['key']
     file.close()
     return CHAVE_TELEGRAM
+
+# alguma coisa
