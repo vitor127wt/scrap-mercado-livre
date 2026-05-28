@@ -123,7 +123,11 @@ if __name__ == '__main__':
 
     # 2. Define os argumentos que o terminal deve receber
     # O 'type=str' garante que o Python leia como texto, e 'help' descreve o argumento
-    parser.add_argument("busca", type=str, help="O termo ou produto que você deseja buscar. Caso seja mais de uma palavra use aspas ")
+    parser.add_argument("busca", 
+                        type=str,
+                        nargs='?',
+                        default=True,
+                        help="O termo ou produto que você deseja buscar. Caso seja mais de uma palavra use aspas ")
     parser.add_argument("--arquivo", '-a',
                         type=str,
                         help="O nome do arquivo CSV de saída (ex: resultado.csv)",
@@ -133,11 +137,12 @@ if __name__ == '__main__':
                         help="Quantas paginas deseja que sejam raspadas (Digite somente numeros, o limite é 10 paginas)",
                         default= 1)
     parser.add_argument('--telegram', '-t',
-                        action='store-true',
+                        action='store_true',
                         help='Inicia o script para responder pelo bot do Telegram')
     
     # 3. Faz o parse (extração) dos argumentos digitados
     args = parser.parse_args()
+    print(args.telegram)
     if args.telegram:
         iniciar_bot()
     elif args.busca:

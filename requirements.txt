@@ -1,9 +1,13 @@
+
+anyio==4.13.0
 attrs==26.1.0
 beautifulsoup4==4.14.3
 certifi==2026.5.20
 cffi==2.0.0
 charset-normalizer==3.4.7
 h11==0.16.0
+httpcore==1.0.9
+httpx==0.28.1
 idna==3.16
 lxml==6.1.1
 numpy==2.4.6
@@ -14,6 +18,7 @@ pycparser==3.0
 PySocks==1.7.1
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.2
+python-telegram-bot==22.7
 requests==2.34.2
 selenium==4.44.0
 six==1.17.0
