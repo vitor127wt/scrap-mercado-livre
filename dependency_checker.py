@@ -1,13 +1,14 @@
 import sys
 import subprocess
 import time
+import importlib
 
 def verificar_dependencias():
-    DEPENDENCIAS = ['selenium', 'webdriver-manager', 'pandas', 'python-telegram-bot']
+    DEPENDENCIAS = ['selenium', 'webdriver_manager', 'pandas']
     for dependencia in DEPENDENCIAS:
         nome_pacote = dependencia
         try:
-            __import__(nome_pacote)
+            importlib.import_module(nome_pacote)
         except ModuleNotFoundError:
             print(f'Pacote: {nome_pacote}, não encontrado. Deseja instalar ?')
             if perguntar():
@@ -34,8 +35,11 @@ def perguntar(pergunta: str = '[Y] Para instalar. [N] Para sair.') -> bool:
     resposta = resposta.upper()
     if not validar_resposta(resposta):
         print('Entrada invalida.')
-        perguntar(pergunta)
-    return True if resposta == 'Y' else False
+        return perguntar(pergunta)
+    if resposta == 'Y':
+        return True
+    elif resposta == 'N':
+        return False
 
 def validar_resposta(resposta) -> bool:
     if len(resposta) != 1:
