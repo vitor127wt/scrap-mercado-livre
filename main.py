@@ -61,7 +61,7 @@ def iniciar(busca: str, nome: str, paginas: int, telegram : tuple = None):
     def mensagem(texto: str):
         print(texto)
         if telegram:
-            chat_id, loop, context = telegram
+            chat_id, context, loop = telegram
             
             asyncio.run_coroutine_threadsafe(
                 context.bot.send_message(chat_id=chat_id, text=texto),
@@ -71,7 +71,7 @@ def iniciar(busca: str, nome: str, paginas: int, telegram : tuple = None):
     def mostrar_produtos(produtos: list) -> int:
         quantidade = 1
         for produto in produtos:
-            mensagem(f'{quantidade} -> {produto['nome']}')
+            mensagem(f'{produto['nome']} \n {produto['link']}')
             quantidade += 1
         return quantidade
 
