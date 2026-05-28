@@ -96,10 +96,10 @@ def iniciar(busca: str, nome: str, paginas: int):
         if inicio:
             exportar.cria_csv(nome, data_frame)
             inicio = False
-            dormir(randint(2, 5))
             if paginas == 1:
                 continue
             proxima_pagina(navegador=navegador, pagina=pagina)
+            dormir(randint(2, 6))
             continue
         exportar.adicionar_csv(nome, data_frame)
         proxima_pagina(navegador=navegador, pagina=pagina)
